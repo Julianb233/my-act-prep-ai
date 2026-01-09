@@ -122,68 +122,166 @@ function Hero() {
           </motion.div>
         </motion.div>
 
+        {/* 3D Product Mockup with Glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="mt-16 relative"
+          className="mt-16 relative perspective-container"
         >
-          <div className="bg-gradient-to-b from-teal-100 to-white rounded-2xl p-8 shadow-2xl border border-gray-100">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-sm text-gray-500">Composite Score</p>
-                    <p className="text-4xl font-bold text-teal-600">28</p>
-                    <p className="text-sm text-green-600">+4 from diagnostic</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm text-gray-500">Target Score</p>
-                    <p className="text-4xl font-bold text-gray-300">32</p>
-                    <p className="text-sm text-gray-500">ACT in 34 days</p>
+          {/* Background Glow Effects */}
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-teal-400/30 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-cyan-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 left-1/3 w-56 h-56 bg-rose-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          </div>
+
+          {/* Main 3D Mockup */}
+          <motion.div
+            whileHover={{ rotateY: -5, rotateX: 2, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="mockup-3d mockup-shadow rounded-2xl overflow-hidden"
+          >
+            <div className="glass-card p-1">
+              <div className="bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-900/90 dark:to-gray-800/70 rounded-xl p-6 backdrop-blur-xl">
+                {/* Browser Chrome */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <div className="w-3 h-3 rounded-full bg-green-400" />
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-500 text-center">
+                      myactprepai.com/dashboard
+                    </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-4 gap-2 pt-4 border-t">
-                  <div className="text-center">
-                    <p className="text-xs text-gray-500">English</p>
-                    <p className="text-lg font-bold text-teal-600">29</p>
-                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                      <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '81%' }}></div>
+
+                {/* Score Dashboard */}
+                <div className="space-y-6">
+                  <div className="flex justify-between items-start">
+                    <div className="glass-card rounded-xl p-4 flex-1 mr-4">
+                      <p className="text-sm text-gray-500 mb-1">Composite Score</p>
+                      <div className="flex items-baseline gap-2">
+                        <motion.span
+                          className="text-6xl font-bold gradient-text"
+                          initial={{ scale: 0.5, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.6, type: "spring" }}
+                        >
+                          28
+                        </motion.span>
+                        <span className="flex items-center gap-1 text-green-600 font-medium">
+                          <TrendingUp className="w-4 h-4" />
+                          +4
+                        </span>
+                      </div>
+                    </div>
+                    <div className="glass-card rounded-xl p-4 text-center">
+                      <p className="text-sm text-gray-500 mb-1">Target</p>
+                      <p className="text-3xl font-bold text-gray-400">32</p>
+                      <p className="text-xs text-rose-500 font-medium mt-1">34 days left</p>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-500">Math</p>
-                    <p className="text-lg font-bold text-teal-600">27</p>
-                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                      <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '75%' }}></div>
-                    </div>
+
+                  {/* Section Scores - 4 columns */}
+                  <div className="grid grid-cols-4 gap-3">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                      className="glass-card rounded-lg p-3 text-center"
+                    >
+                      <div className="text-xs text-gray-500 mb-1">English</div>
+                      <div className="text-xl font-bold text-blue-600">29</div>
+                      <div className="h-1.5 rounded-full bg-gray-100 mt-2 overflow-hidden">
+                        <motion.div
+                          className="h-full bg-blue-500 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: '81%' }}
+                          transition={{ duration: 1, delay: 0.9 }}
+                        />
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 }}
+                      className="glass-card rounded-lg p-3 text-center"
+                    >
+                      <div className="text-xs text-gray-500 mb-1">Math</div>
+                      <div className="text-xl font-bold text-green-600">27</div>
+                      <div className="h-1.5 rounded-full bg-gray-100 mt-2 overflow-hidden">
+                        <motion.div
+                          className="h-full bg-green-500 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: '75%' }}
+                          transition={{ duration: 1, delay: 1 }}
+                        />
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 }}
+                      className="glass-card rounded-lg p-3 text-center"
+                    >
+                      <div className="text-xs text-gray-500 mb-1">Reading</div>
+                      <div className="text-xl font-bold text-purple-600">28</div>
+                      <div className="h-1.5 rounded-full bg-gray-100 mt-2 overflow-hidden">
+                        <motion.div
+                          className="h-full bg-purple-500 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: '78%' }}
+                          transition={{ duration: 1, delay: 1.1 }}
+                        />
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1 }}
+                      className="glass-card rounded-lg p-3 text-center"
+                    >
+                      <div className="text-xs text-gray-500 mb-1">Science</div>
+                      <div className="text-xl font-bold text-orange-600">28</div>
+                      <div className="h-1.5 rounded-full bg-gray-100 mt-2 overflow-hidden">
+                        <motion.div
+                          className="h-full bg-orange-500 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: '78%' }}
+                          transition={{ duration: 1, delay: 1.2 }}
+                        />
+                      </div>
+                    </motion.div>
                   </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-500">Reading</p>
-                    <p className="text-lg font-bold text-teal-600">28</p>
-                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                      <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '78%' }}></div>
+
+                  {/* Time Management Banner */}
+                  <div className="flex items-center justify-between glass-card rounded-lg p-3">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-teal-600" />
+                      <span className="text-sm font-medium text-gray-600">Time Management</span>
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-500">Science</p>
-                    <p className="text-lg font-bold text-teal-600">28</p>
-                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                      <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '78%' }}></div>
+                    <div className="flex gap-2 text-xs">
+                      <span className="bg-blue-100/70 text-blue-700 px-2 py-1 rounded">45 min</span>
+                      <span className="bg-green-100/70 text-green-700 px-2 py-1 rounded">60 min</span>
+                      <span className="bg-purple-100/70 text-purple-700 px-2 py-1 rounded">35 min</span>
+                      <span className="bg-orange-100/70 text-orange-700 px-2 py-1 rounded">35 min</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="absolute -right-4 top-20 bg-white rounded-xl shadow-lg p-4 animate-float hidden lg:block">
+          </motion.div>
+
+          {/* Floating Glassmorphism Cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+            className="absolute -right-4 lg:-right-8 top-20 glass-card rounded-xl p-4 animate-float-3d hidden lg:block glow-primary"
+          >
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 gradient-bg rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 gradient-bg rounded-full flex items-center justify-center shadow-lg">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -191,7 +289,42 @@ function Hero() {
                 <p className="text-xs text-gray-500">Science: Data Rep</p>
               </div>
             </div>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1 }}
+            className="absolute -left-4 lg:-left-8 top-40 glass-card rounded-xl p-4 animate-float hidden lg:block"
+            style={{ animationDelay: '0.5s' }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-sm">+4 Composite</p>
+                <p className="text-xs text-gray-500">Avg. improvement</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="absolute right-20 -bottom-4 glass-card rounded-xl p-3 animate-float hidden lg:block"
+            style={{ animationDelay: '1s' }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 border-2 border-white" />
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 border-2 border-white" />
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 border-2 border-white" />
+              </div>
+              <span className="text-xs text-gray-600">30,000+ students</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
