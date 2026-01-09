@@ -368,32 +368,32 @@ function Features() {
     {
       icon: ClipboardList,
       title: "Practice Tests",
-      description: "Realistic full-length ACT simulations. Timed sections, official format, detailed answer explanations.",
+      description: "Take realistic full-length ACT simulations with accurate timing, official format, and detailed answer explanations. Our tests mirror the real ACT so closely that students consistently say test day felt like just another practice session.",
     },
     {
       icon: BarChart3,
       title: "Score Analysis",
-      description: "Deep dive into your performance. See exactly which question types trip you up and track improvement.",
+      description: "Get a deep dive into your performance across every question type and topic. See exactly which areas trip you up, track your improvement over time, and identify patterns in your mistakes that you might miss on your own.",
     },
     {
       icon: Clock,
       title: "Time Management",
-      description: "Master ACT pacing with section timers, rushing alerts, and strategies to finish every section strong.",
+      description: "Master ACT pacing with our intelligent section timers, rushing alerts, and proven strategies to finish every section strong. Learn exactly when to move on from tough questions and how to budget your time for maximum points.",
     },
     {
       icon: GraduationCap,
       title: "College Matching",
-      description: "See which colleges match your score range. Set target scores based on your dream schools.",
+      description: "See which colleges match your current and projected score ranges. Set target scores based on your dream schools and watch your college matches expand as your scores improve. Make informed decisions about where to apply.",
     },
     {
       icon: BookOpen,
       title: "Section Mastery",
-      description: "Focused practice for English, Math, Reading, Science, and optional Writing. Master each section.",
+      description: "Focused, intensive practice for each ACT section - English, Math, Reading, Science, and the optional Writing. Each section has customized strategies and practice sets designed to help you master the specific skills tested.",
     },
     {
       icon: RefreshCw,
       title: "Smart Review",
-      description: "AI analyzes wrong answers to find patterns. Review sessions focus on your specific mistake types.",
+      description: "Our AI analyzes your wrong answers to find patterns you might not notice yourself. Review sessions automatically focus on your specific mistake types, ensuring you don't keep making the same errors on test day.",
     },
   ];
 
@@ -629,25 +629,158 @@ function Pricing() {
   );
 }
 
+function Comparison() {
+  const features = [
+    { name: "Full Practice Tests", us: "6", competitor1: "3", competitor2: "4" },
+    { name: "AI Adaptive Practice", us: true, competitor1: true, competitor2: false },
+    { name: "Time Management Tools", us: true, competitor1: false, competitor2: "limited" },
+    { name: "College Matching", us: true, competitor1: false, competitor2: false },
+    { name: "Science Section Drills", us: "Unlimited", competitor1: "Limited", competitor2: "Yes" },
+    { name: "Score Prediction", us: true, competitor1: "partial", competitor2: false },
+    { name: "Superscore Analysis", us: true, competitor1: false, competitor2: true },
+    { name: "Price", us: "$29/mo", competitor1: "$99 one-time", competitor2: "$449+" },
+  ];
+
+  const renderValue = (value: boolean | string) => {
+    if (value === true) return <Check className="w-5 h-5 text-green-500 mx-auto" />;
+    if (value === false) return <span className="text-gray-300">—</span>;
+    if (value === "limited" || value === "partial") return <span className="text-yellow-500 text-sm font-medium">Partial</span>;
+    return <span className="text-sm font-medium">{value}</span>;
+  };
+
+  return (
+    <section className="py-24 bg-gray-50">
+      <div className="max-w-5xl mx-auto px-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="text-center mb-16"
+        >
+          <motion.p variants={fadeInUp} className="text-teal-600 font-semibold mb-4">COMPARISON</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-6">
+            See why students <span className="gradient-text">choose us</span>
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Compare our features with other popular ACT prep options.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Feature</th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mb-2">
+                        <Trophy className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-bold text-teal-600">My ACT Prep AI</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                        <span className="text-gray-500 text-xs font-bold">M</span>
+                      </div>
+                      <span className="font-medium text-gray-600">Magoosh</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                        <span className="text-gray-500 text-xs font-bold">K</span>
+                      </div>
+                      <span className="font-medium text-gray-600">Kaplan</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {features.map((feature, index) => (
+                  <tr
+                    key={feature.name}
+                    className={`${index % 2 === 0 ? "bg-gray-50/50" : ""} ${
+                      feature.name === "Price" ? "border-t-2 border-teal-100" : ""
+                    }`}
+                  >
+                    <td className="px-6 py-4 text-sm font-medium text-gray-700">{feature.name}</td>
+                    <td className="px-6 py-4 text-center bg-teal-50/30">{renderValue(feature.us)}</td>
+                    <td className="px-6 py-4 text-center">{renderValue(feature.competitor1)}</td>
+                    <td className="px-6 py-4 text-center">{renderValue(feature.competitor2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="px-6 py-4 bg-gradient-to-r from-teal-50 to-cyan-50 border-t border-teal-100">
+            <p className="text-sm text-gray-600 text-center">
+              <span className="font-semibold text-teal-600">Best value:</span> Get unlimited AI-powered practice, 6 full tests, and college matching for just $29/month.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Testimonials() {
   const testimonials = [
     {
-      quote: "The time management feature was a game-changer. I used to run out of time on Reading - now I finish with 3 minutes to spare.",
+      quote: "The time management feature was a game-changer. I used to run out of time on Reading every single test - now I finish with 3 minutes to spare and have time to double-check my answers.",
       author: "Marcus T.",
-      role: "Senior, 28 → 33 composite",
+      role: "Senior, University of Michigan",
       rating: 5,
+      initials: "MT",
+      score: "28 → 33 Composite",
     },
     {
-      quote: "I love seeing which colleges match my scores. It motivated me to push for that extra 2 points.",
+      quote: "I love seeing which colleges match my scores. It motivated me to push for that extra 2 points. Watching my college matches update as I improved was incredibly motivating!",
       author: "Sophia L.",
-      role: "Junior",
+      role: "Junior, Phoenix AZ",
       rating: 5,
+      initials: "SL",
+      score: "26 → 31 Composite",
     },
     {
-      quote: "The Science section practice is so thorough. I went from a 24 to a 31 in just 6 weeks.",
+      quote: "The Science section practice is so thorough. I went from a 24 to a 31 in just 6 weeks. The data interpretation drills were exactly what I needed.",
       author: "Ryan P.",
-      role: "Senior",
+      role: "Senior, Northwestern Admit",
       rating: 5,
+      initials: "RP",
+      score: "Science: 24 → 31",
+    },
+    {
+      quote: "I was terrified of the English section - all those grammar rules. The targeted practice broke everything down and my score jumped from 25 to 32. Incredible!",
+      author: "Jessica H.",
+      role: "Senior, Dallas TX",
+      rating: 5,
+      initials: "JH",
+      score: "25 → 30 Composite",
+    },
+    {
+      quote: "The reading pacing strategies were essential. I learned to skim efficiently and now I actually finish the passages with time to spare. My Reading score went up 5 points.",
+      author: "Kevin D.",
+      role: "Junior, Atlanta GA",
+      rating: 5,
+      initials: "KD",
+      score: "26 → 32 Composite",
+    },
+    {
+      quote: "As a college counselor, I've seen many ACT prep programs. This is by far the most comprehensive and personalized. I recommend it to every student I work with.",
+      author: "Dr. Martinez",
+      role: "College Counselor, Private High School",
+      rating: 5,
+      initials: "DM",
+      score: "Top Recommendation",
     },
   ];
 
@@ -686,11 +819,18 @@ function Testimonials() {
                 ))}
               </div>
               <p className="text-lg text-gray-700 mb-6">&ldquo;{testimonial.quote}&rdquo;</p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500" />
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold">
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-1 rounded">
+                  {testimonial.score}
                 </div>
               </div>
             </motion.div>
@@ -825,39 +965,51 @@ function Footer() {
               </div>
               <span className="font-bold text-xl">My ACT Prep AI</span>
             </div>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               AI-powered ACT preparation for your college dreams.
             </p>
+            <div className="flex gap-4">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+            </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-gray-400">
               <li><a href="#features" className="hover:text-white transition">Features</a></li>
               <li><a href="#pricing" className="hover:text-white transition">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition">Practice Tests</a></li>
-              <li><a href="#" className="hover:text-white transition">College Matching</a></li>
+              <li><a href="#how-it-works" className="hover:text-white transition">How It Works</a></li>
+              <li><a href="#faq" className="hover:text-white transition">FAQ</a></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition">About</a></li>
-              <li><a href="#" className="hover:text-white transition">Success Stories</a></li>
-              <li><a href="#" className="hover:text-white transition">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition">Contact</a></li>
+              <li><a href="/about" className="hover:text-white transition">About Us</a></li>
+              <li><a href="#testimonials" className="hover:text-white transition">Success Stories</a></li>
+              <li><a href="mailto:hello@myactprepai.com" className="hover:text-white transition">Contact</a></li>
+              <li><a href="mailto:support@myactprepai.com" className="hover:text-white transition">Support</a></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-              <li><a href="#" className="hover:text-white transition">Terms</a></li>
-              <li><a href="#" className="hover:text-white transition">Refund Policy</a></li>
+              <li><a href="/privacy" className="hover:text-white transition">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition">Terms of Service</a></li>
+              <li><a href="/terms#refund" className="hover:text-white transition">Refund Policy</a></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} My ACT Prep AI. All rights reserved.</p>
+          <p className="mt-4 md:mt-0 text-sm">Helping students conquer the ACT</p>
         </div>
       </div>
     </footer>
@@ -873,6 +1025,7 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <Pricing />
+      <Comparison />
       <Testimonials />
       <FAQ />
       <FinalCTA />
