@@ -20,6 +20,21 @@ export default function SignupPage() {
     setError("");
 
     try {
+      // Register the user first
+      const registerResponse = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const registerData = await registerResponse.json();
+
+      if (!registerResponse.ok) {
+        setError(registerData.error || "Could not create account. Please try again.");
+        return;
+      }
+
+      // Sign in after successful registration
       const result = await signIn("credentials", {
         email,
         password,
@@ -27,7 +42,7 @@ export default function SignupPage() {
       });
 
       if (result?.error) {
-        setError("Could not create account. Please try again.");
+        setError("Account created but could not sign in. Please try logging in.");
       } else {
         router.push("/dashboard");
       }
